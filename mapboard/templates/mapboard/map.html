@@ -29,14 +29,12 @@
 
     <span id='map'></span>
     <span id="control-pane">
-        <form>
-            <div>
-                <label>Search</label>
-                <input id="input-location" type="text" placeholder="Input a place"></input>
-            </div>
-            <button onclick="searchLocation"> Add </button>
+        <div>
+            <label>Search</label>
+            <input id="input-location" type="input" placeholder="Input a place"></input>
+        </div>
+        <button onclick="searchLocation()"> Search </button>
 
-        </form>
         <div><label id="txt-lat">Latitude</label></div>
         <div><label id="txt-lng">Longtitude</label></div>
     </span>
@@ -68,12 +66,14 @@
         var longitude = document.getElementById('txt-lng');
         latitude.innerHTML = lngLat.lat
         longitude.innerHTML = lngLat.lng
+        console.log(location)
     });
 
     function searchLocation() {
-        var location = document.getElementById('input-location').value;
-        fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/' + location + '.json?access_token=' + mapboxgl.accessToken)
+        var location = document.getElementById('input-location');
+        fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/' + location.value + '.json?access_token=' + mapboxgl.accessToken)
             .then(function (response) {
+                console.log(response)
                 return response.json();
             })
             .then(function (data) {
