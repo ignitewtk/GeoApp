@@ -31,12 +31,23 @@
     <span id="control-pane">
         <div>
             <label>Search</label>
-            <input id="input-location" type="input" placeholder="Input a place"></input>
+            <input id="input-location" type="input" class="form-control" placeholder="Input a place"></input>
         </div>
-        <button onclick="searchLocation()"> Search </button>
+        <button class="btn btn-primary" onclick="searchLocation()"> Search </button>
 
-        <div><label id="txt-lat">Latitude</label></div>
-        <div><label id="txt-lng">Longtitude</label></div>
+        <div>Latitude:<label id="txt-lat" class="form-label"></label></div>
+        <div>Longtitude:<label id="txt-lng" class="form-label"></label></div>
+        {% if position_list %}
+        <ul>
+            {% for position in position_list %}
+            <li>
+                <div>Lat:<label>{{ position.latitude }}</label></div>
+                <div>Lng:<label>{{ position.longitude }}</label></div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        {% endif %}
     </span>
 </div>
 <script>
@@ -67,6 +78,8 @@
         latitude.innerHTML = lngLat.lat
         longitude.innerHTML = lngLat.lng
         console.log(location)
+
+        var marker = new mapboxgl.Marker().setLngLat(lngLat).addTo(map)
     });
 
     function searchLocation() {

@@ -1,6 +1,6 @@
 
 <nav>
-    <ul>
+    <ul class="menu">
         <a href="{% url 'map' %}"><li>Map</li></a>
         <a href="{% url 'dashboard' %}"><li><span>Dashboard</span></li></a>
     </ul>
@@ -19,7 +19,7 @@
         height: 100%;
     }
 
-    li {
+    .menu li {
         height: 100%;
         width: 80px;
         justify-content: center;
@@ -30,7 +30,7 @@
         color: black;
     }
     
-    li:hover {
+    .menu li:hover {
         background-color: rgb(226, 226, 226);
     }
 
