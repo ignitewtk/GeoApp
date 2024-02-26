@@ -1,0 +1,44 @@
+
+<nav>
+    <ul>
+        <a href="{% url 'map' %}"><li>Map</li></a>
+        <a href="{% url 'dashboard' %}"><li><span>Dashboard</span></li></a>
+    </ul>
+</nav>
+
+<style>
+    nav {
+        height: 100%;
+        padding-left: 2rem;
+    }
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        height: 100%;
+    }
+
+    li {
+        height: 100%;
+        width: 80px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        line-height: 100%;
+        display: flex;
+        color: black;
+    }
+    
+    li:hover {
+        background-color: rgb(226, 226, 226);
+    }
+
+    li span {
+        vertical-align: middle;
+    }
+
+    a {
+        text-decoration: none;
+    }
+</style>

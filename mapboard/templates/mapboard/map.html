@@ -1,0 +1,96 @@
+{% extends 'base_layout.html' %}
+{% block board %}
+
+<style>
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1rem 0 1rem 2rem;
+        display: flex;
+    }
+
+    #map {
+        display: inline-block;
+        position: relative;
+        top: 0;
+        bottom: 0;
+        width: 80vh;
+        height: 60vh;
+    }
+
+    #control-pane {
+        margin-left: 1rem;
+    }
+</style>
+
+<div class="container">
+
+
+
+    <span id='map'></span>
+    <span id="control-pane">
+        <form>
+            <div>
+                <label>Search</label>
+                <input id="input-location" type="text" placeholder="Input a place"></input>
+            </div>
+            <button onclick="searchLocation"> Add </button>
+
+        </form>
+        <div><label id="txt-lat">Latitude</label></div>
+        <div><label id="txt-lng">Longtitude</label></div>
+    </span>
+</div>
+<script>
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoidGluZ2thbmd3dSIsImEiOiJjbHQwMGo3dmcwdnI2MmtudWN1dWE0ZjY1In0.8V0JPuTLEwEKsH-C_kx-0w'
+    const map = new mapboxgl.Map({
+        container: 'map',
+        // Replace YOUR_STYLE_URL with your style URL.
+        style: 'mapbox://styles/examples/clg45vm7400c501pfubolb0xz',
+        center: [115.801442, -31.959019],
+        zoom: 10.7
+    });
+
+    map.on('click', (event) => {
+        // If the user clicked on one of your markers, get its information.
+        // const features = map.queryRenderedFeatures(event.point, {
+        //     layers: ['YOUR_LAYER_NAME'] // replace with your layer name
+        // });
+        // if (!features.length) {
+        //     return;
+        // }
+        // const feature = features[0];
+
+        var lngLat = event.lngLat;
+        // Code from the next step will go here.
+        var latitude = document.getElementById('txt-lat');
+        var longitude = document.getElementById('txt-lng');
+        latitude.innerHTML = lngLat.lat
+        longitude.innerHTML = lngLat.lng
+    });
+
+    function searchLocation() {
+        var location = document.getElementById('input-location').value;
+        fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/' + location + '.json?access_token=' + mapboxgl.accessToken)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                // 获取第一个地点的坐标信息
+                var coordinates = data.features[0].geometry.coordinates;
+                var lng = coordinates[0];
+                var lat = coordinates[1];
+                console.log(lng, lat);
+                // 添加坐标到地图
+                new mapboxgl.Marker()
+                    .setLngLat([lng, lat])
+                    .addTo(map);
+
+                // 将地图中心点移动到该坐标
+                map.setCenter([lng, lat]);
+            });
+    }
+</script>
+
+{% endblock %}

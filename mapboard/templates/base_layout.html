@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Map Board</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js" integrity="sha512-k37wQcV4v2h6jgYf5IUz1MoSKPpDs630XGSmCaCCOXxy2awgAWKHGZWr9nMyGgk3IOxA1NxdkN8r1JHgkUtMoQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v3.1.0/mapbox-gl.css' rel='stylesheet' />
+    </head>
+    <body style="margin: 0;">
+        <div class="header" >
+            {% load static %}
+            <img class="header-logo" src="{% static '/images/1200px-CurtinUni_Logo.svg.png' %}" alt="My image" />
+            <!-- <img style="height:100%; width:auto" src="{% static '/images/CU-logo.png' %}" alt="My image" /> -->
+            
+        </div>
+        <div style="width: 100%; height: 8vh; background-color: rgb(211, 211, 211);">
+            {% include 'menu.html' with title="Component Title" content="Component Content" %}
+        </div>
+        <div style="height: 70vh;">
+            {% block board %}
+            {% endblock %}
+        </div>
+        <div class="footer">
+            footer
+        </div>
+    </body>
+</html>
+
+
+<style>
+    html {
+        width: 99vw;
+        height: 100vh;
+    }
+
+    .header {
+        width: 100%; 
+        height: 12vh; 
+        padding-left:2rem; 
+        background-color: rgb(241, 232, 232);
+        display: flex;
+        vertical-align: middle;
+        align-items: center;
+    }
+
+    .header-logo {
+        height:80%; 
+        width: "auto";
+        
+    }
+
+    .footer {
+        width: 100%;
+        height: 10vh;
+        background-color: rgb(51, 51, 51);
+    }
+</style>
