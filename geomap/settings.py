@@ -78,6 +78,18 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
+    },
+    "azure-product-service": {
+        "ENGINE": "mssql",
+        'NAME': 'service-product',
+        'USER': 'admin-tony',
+        'PASSWORD': 'a%T000001',
+        'HOST': 'tcp:service-product.database.windows.net',
+        'PORT': '1433',
+
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+        },
     }
 }
 
