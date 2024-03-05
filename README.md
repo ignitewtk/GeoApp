@@ -11,3 +11,7 @@ Direct into the project root folder and execute to run
 ``` 
 python manage.py runserver
 ```
+
+Sample screenshot
+
+![Sample](static/images/sample.png "Geomap App")
