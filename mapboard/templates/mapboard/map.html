@@ -43,7 +43,7 @@
 </div>
 <script>
 
-    mapboxgl.accessToken = 'pk.eyJ1IjoidGluZ2thbmd3dSIsImEiOiJjbHQwMGo3dmcwdnI2MmtudWN1dWE0ZjY1In0.8V0JPuTLEwEKsH-C_kx-0w'
+    mapboxgl.accessToken = 'pk.eyJ1IjoidGluZ2thbmd3dSIsImEiOiJjbHRlYTdiejkwY2Q5Mm1taGd4ZmYwcDlkIn0.srluRy61JJXofTwP4MwNmQ'
     const map = new mapboxgl.Map({
         container: 'map',
         // Replace YOUR_STYLE_URL with your style URL.
@@ -53,14 +53,6 @@
     });
 
     map.on('click', (event) => {
-        // If the user clicked on one of your markers, get its information.
-        // const features = map.queryRenderedFeatures(event.point, {
-        //     layers: ['YOUR_LAYER_NAME'] // replace with your layer name
-        // });
-        // if (!features.length) {
-        //     return;
-        // }
-        // const feature = features[0];
 
         var lngLat = event.lngLat;
         // Code from the next step will go here.
@@ -77,17 +69,17 @@
                 return response.json();
             })
             .then(function (data) {
-                // 获取第一个地点的坐标信息
+                // Get the info of the first location
                 var coordinates = data.features[0].geometry.coordinates;
                 var lng = coordinates[0];
                 var lat = coordinates[1];
                 console.log(lng, lat);
-                // 添加坐标到地图
+                // Add marker to the map
                 new mapboxgl.Marker()
                     .setLngLat([lng, lat])
                     .addTo(map);
 
-                // 将地图中心点移动到该坐标
+                // Move the position to the center of the map
                 map.setCenter([lng, lat]);
             });
     }
